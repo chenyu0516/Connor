@@ -1,18 +1,22 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from discord.ext import commands
 import json
 import discord
 import asyncio
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+#intents setting
+intents = discord.Intents.all()
+
+bot = commands.Bot(command_prefix="!", intents=intents)
+
+with open('item.json', "r", encoding="utf8") as file:
+    data = json.load(file)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+@bot.event
+async def on_ready():
+    print("Bot is ready")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+bot.run(data['token'])
+
